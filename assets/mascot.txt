@@ -1,0 +1,15 @@
+# Piper — checking the line
+
+< ▄▄ | ▄▄ >   ║
+   ▄▀ 0x0 ▀▄   ║
+    █  ───  █══╝
+    █ VERIFY█
+     ▀▀   ▀▀
+
+# Piper — committed
+
+< ▄▄ ✓ ▄▄ >   ║
+   ▄▀ ^x^ ▀▄   ║
+    █  ───  █══╝
+    █ COMMIT█
+     ▀▀   ▀▀

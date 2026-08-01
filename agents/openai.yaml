@@ -1,0 +1,7 @@
+interface:
+  display_name: "Curl Bash Installer Engineering"
+  short_description: "Build secure transactional shell installers"
+  default_prompt: "Use $curl-bash to design, test, and release a secure curl-pipe-bash installer."
+
+policy:
+  allow_implicit_invocation: true

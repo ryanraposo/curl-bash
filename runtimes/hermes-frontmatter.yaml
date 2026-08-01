@@ -1,0 +1,14 @@
+---
+name: curl-bash
+description: >-
+  Use when designing, auditing, testing, or releasing secure curl-pipe-bash
+  installers with verification, idempotency, rollback, and supply-chain controls.
+version: 1.0.0
+author: Ryan Raposo
+license: MIT
+platforms: [linux, macos]
+metadata:
+  hermes:
+    tags: [installer, bash, curl, security, supply-chain, release]
+    category: developer-tools
+---
