@@ -12,6 +12,7 @@ cb_files="$cb_dist/files.txt"
 (cd "$cb_root" && find SKILL.md AGENTS.md README.md SECURITY.md CONTRIBUTING.md VERSION LICENSE install.sh uninstall.sh agents runtimes references scripts assets tests -type f -print | LC_ALL=C sort) > "$cb_files"
 tar --create --directory "$cb_root" --files-from "$cb_files" --sort=name \
   --transform="s,^,$cb_prefix/," --mtime="@$cb_epoch" --owner=0 --group=0 \
-  --numeric-owner --format=posix | gzip -n > "$cb_archive"
+  --numeric-owner --format=posix --pax-option=delete=atime,delete=ctime |
+  gzip -n > "$cb_archive"
 (cd "$cb_dist" && sha256sum "$(basename "$cb_archive")" > SHA256SUMS)
 printf '%s\n' "$cb_archive"

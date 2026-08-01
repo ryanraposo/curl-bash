@@ -17,7 +17,15 @@ assert "OpenAI frontmatter stays minimal" sh -c '! sed -n "2,/^---$/p" "$1" | gr
 assert "Hermes payload is versioned" grep -q '^version: 1.0.0$' "$cb_root/runtimes/hermes-frontmatter.yaml"
 assert "AGENTS routes audits through sources" grep -q 'references/primary-sources.md' "$cb_root/AGENTS.md"
 assert "Piper has two poses" sh -c 'grep -q "checking the line" "$1" && grep -q "committed" "$1"' sh "$cb_root/assets/mascot.txt"
-assert "social preview is exactly 1280x640" sh -c 'identify -format "%wx%h" "$1" | grep -qx 1280x640' sh "$cb_root/assets/github-social-preview.png"
+assert "social preview is exactly 1280x640" python3 - "$cb_root/assets/github-social-preview.png" <<'PY'
+import pathlib
+import struct
+import sys
+
+data = pathlib.Path(sys.argv[1]).read_bytes()
+assert data[:8] == b"\x89PNG\r\n\x1a\n"
+assert struct.unpack(">II", data[16:24]) == (1280, 640)
+PY
 
 cb_agents="$cb_tmp/agents" cb_hermes="$cb_tmp/hermes" cb_state="$cb_tmp/state"
 cb_dry="$cb_tmp/dry.out"
