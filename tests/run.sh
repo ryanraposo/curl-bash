@@ -26,6 +26,9 @@ data = pathlib.Path(sys.argv[1]).read_bytes()
 assert data[:8] == b"\x89PNG\r\n\x1a\n"
 assert struct.unpack(">II", data[16:24]) == (1280, 640)
 PY
+assert "Pages landing page carries both Piper poses" sh -c 'grep -q "VERIFY" "$1" && grep -q "COMMIT" "$1"' sh "$cb_root/index.html"
+assert "Pages command uses HTTPS-only curl policy" grep -Fq "curl -fsSL --proto '=https' --tlsv1.2 https://ryanraposo.github.io/curl-bash/install.sh | bash" "$cb_root/index.html"
+assert "Pages copy control is accessible" grep -q 'aria-label="Copy install command"' "$cb_root/index.html"
 
 cb_agents="$cb_tmp/agents" cb_hermes="$cb_tmp/hermes" cb_state="$cb_tmp/state"
 cb_dry="$cb_tmp/dry.out"

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Build curl-pipe-bash installers that fetch, verify, transact, and recover.">
+  <title>curl-bash</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#fff;color:#000;font-family:"Courier New",monospace;padding:40px 20px}main{width:100%;max-width:760px;min-width:0;text-align:center}.mascot{display:inline-block;margin:0;line-height:1.05;font-size:clamp(15px,3vw,20px);text-align:left}h1{font-size:clamp(2rem,7vw,3.25rem);margin:14px 0 6px}p{color:#555;line-height:1.65}.tagline{margin-top:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:28px 0}.card{text-align:left;border:1px solid #d8d8d8;border-radius:10px;padding:16px;font-size:13px;line-height:1.55;color:#555}.card strong{display:block;color:#000;margin-bottom:6px}.curl{display:flex;gap:12px;align-items:center;background:#f5f5f5;border:1px solid #ddd;border-radius:10px;padding:15px;text-align:left;overflow:hidden}.curl code{min-width:0;flex:1;overflow-x:auto;scrollbar-width:none;font:13px inherit;white-space:nowrap}.curl code::-webkit-scrollbar{display:none}.curl button{flex-shrink:0;margin-left:auto;background:#fff;border:1px solid #aaa;border-radius:6px;padding:7px 10px;font:inherit;cursor:pointer}.curl button:hover,.curl button:focus-visible{background:#000;color:#fff}.note{border-left:3px solid #000;background:#fafafa;padding:13px 16px;text-align:left;font-size:13px;line-height:1.55;margin:18px 0}.success{margin-top:28px}.links{font-size:13px;margin-top:20px}.links a{color:#000}@media(max-width:650px){.grid{grid-template-columns:minmax(0,1fr)}.curl{align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <main>
+    <pre class="mascot" aria-label="Piper, the pipewright, checking the line">&lt; ▄▄ | ▄▄ &gt;   ║
+   ▄▀ 0x0 ▀▄   ║
+    █  ───  █══╝
+    █ VERIFY█
+     ▀▀   ▀▀</pre>
+    <h1>curl-bash</h1>
+    <p class="tagline">Fetch. Verify. Transact. Recover.</p>
+    <p><small>Piper, the pipewright, helps agents build safer curl-pipe-bash installers.</small></p>
+
+    <div class="grid">
+      <div class="card"><strong>Fetch completely</strong>Download a versioned archive to a private temporary directory before executing project code.</div>
+      <div class="card"><strong>Verify exactly</strong>Check artifact identity and SHA-256; optionally require GitHub build provenance.</div>
+      <div class="card"><strong>Transact deliberately</strong>Preflight, plan, stage, commit, verify, and leave a durable receipt.</div>
+      <div class="card"><strong>Recover honestly</strong>Reverse committed changes after failures and preserve prior unmanaged state.</div>
+    </div>
+
+    <div class="curl">
+      <code id="command">curl -fsSL --proto '=https' --tlsv1.2 https://ryanraposo.github.io/curl-bash/install.sh | bash</code>
+      <button id="copy" type="button" aria-label="Copy install command">copy</button>
+    </div>
+
+    <div class="note"><strong>Review first:</strong> download <code>install.sh</code>, inspect it, then run <code>bash install.sh --require-attestation</code>. A checksum from the same origin detects mismatch; provenance adds independent evidence about where the artifact was built.</div>
+
+    <pre class="mascot success" aria-label="Piper, the pipewright, after a successful commit">&lt; ▄▄ ✓ ▄▄ &gt;   ║
+   ▄▀ ^x^ ▀▄   ║
+    █  ───  █══╝
+    █ COMMIT█
+     ▀▀   ▀▀</pre>
+    <div class="links"><a href="https://github.com/ryanraposo/curl-bash">github</a> · <a href="https://github.com/ryanraposo/curl-bash#install-the-skill">review-first install</a> · MIT</div>
+  </main>
+  <script>
+    document.getElementById('copy').addEventListener('click', async event => {
+      await navigator.clipboard.writeText(document.getElementById('command').textContent);
+      event.currentTarget.textContent = 'copied';
+      setTimeout(() => { event.currentTarget.textContent = 'copy'; }, 1200);
+    });
+  </script>
+</body>
+</html>

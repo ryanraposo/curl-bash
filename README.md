@@ -127,6 +127,7 @@ attestation on GitHub. See `references/threat-model.md` for the full boundary.
 |---|---|
 | `SKILL.md` | Agent workflow and completion gate |
 | `AGENTS.md` | Repository-aware install and self-use funnel |
+| `index.html` | GitHub Pages landing page and copyable install command |
 | `install.sh` | Small verified release bootstrap |
 | `scripts/install-skill.sh` | Transactional installation engine for this skill |
 | `scripts/scaffold-installer.sh` | General project installer generator |
