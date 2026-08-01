@@ -9,7 +9,10 @@ PROJECT_INSTALL_ROOT="${PROJECT_INSTALL_ROOT:-${XDG_DATA_HOME:-${HOME}/.local/sh
 PROJECT_STATE_ROOT="${PROJECT_STATE_HOME:-${XDG_STATE_HOME:-${HOME}/.local/state}/$PROJECT_NAME}"
 while [ "$#" -gt 0 ]; do case "$1" in --source) PROJECT_SOURCE="${2:-}"; shift 2 ;; --dry-run) PROJECT_DRY_RUN=true; shift ;; --yes) PROJECT_YES=true; shift ;; *) printf 'error: unknown engine option: %s\n' "$1" >&2; exit 2 ;; esac; done
 [ -d "$PROJECT_SOURCE/payload" ] || { printf 'error: payload missing\n' >&2; exit 1; }
-[ "$PROJECT_INSTALL_ROOT" != "/" ] && [ "$PROJECT_INSTALL_ROOT" != "$HOME" ] || { printf 'error: unsafe target\n' >&2; exit 1; }
+if [ "$PROJECT_INSTALL_ROOT" = "/" ] || [ "$PROJECT_INSTALL_ROOT" = "$HOME" ]; then
+  printf 'error: unsafe target\n' >&2
+  exit 1
+fi
 printf '[1/5] preflight\n[2/5] plan: %s\n' "$PROJECT_INSTALL_ROOT"
 if $PROJECT_YES; then printf 'noninteractive policy: yes\n'; fi
 $PROJECT_DRY_RUN && { printf 'dry run complete; no changes made\n'; exit; }

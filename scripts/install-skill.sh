@@ -34,7 +34,9 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-[ -n "$CB_SOURCE" ] && [ -d "$CB_SOURCE" ] || cb_die "--source must name the verified payload"
+if [ -z "$CB_SOURCE" ] || [ ! -d "$CB_SOURCE" ]; then
+  cb_die "--source must name the verified payload"
+fi
 [ "${EUID:-$(id -u)}" -ne 0 ] || cb_die "run as the logged-in user, not root"
 grep -q '^name: curl-bash$' "$CB_SOURCE/SKILL.md" || cb_die "source skill identity is invalid"
 CB_VERSION="$(tr -d '[:space:]' < "$CB_SOURCE/VERSION")"
@@ -58,7 +60,9 @@ cb_info "[1/5] Preflight: source identity, version, tools, and destinations"
 command -v awk >/dev/null 2>&1 || cb_die "awk is required"
 command -v cp >/dev/null 2>&1 || cb_die "cp is required"
 for cb_target in "${CB_TARGETS[@]}"; do
-  [ "$cb_target" != "/" ] && [ "$cb_target" != "$HOME" ] || cb_die "unsafe target: $cb_target"
+  if [ "$cb_target" = "/" ] || [ "$cb_target" = "$HOME" ]; then
+    cb_die "unsafe target: $cb_target"
+  fi
 done
 cb_ok "curl-bash $CB_VERSION is ready to stage"
 

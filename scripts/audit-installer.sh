@@ -2,7 +2,10 @@
 set -euo pipefail
 
 cb_root="${1:-}"
-[ -n "$cb_root" ] && [ -d "$cb_root" ] || { printf 'Usage: audit-installer.sh REPOSITORY\n' >&2; exit 2; }
+if [ -z "$cb_root" ] || [ ! -d "$cb_root" ]; then
+  printf 'Usage: audit-installer.sh REPOSITORY\n' >&2
+  exit 2
+fi
 cb_installer="$cb_root/install.sh"
 [ -f "$cb_installer" ] || { printf 'HIGH missing install.sh\n'; exit 1; }
 cb_high=0 cb_medium=0 cb_low=0
