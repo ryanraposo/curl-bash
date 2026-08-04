@@ -1,15 +1,6 @@
 ---
 name: curl-bash
-description: >-
-  Design, scaffold, audit, test, document, and release secure curl-pipe-bash
-  installers for arbitrary software projects. Use when creating or hardening an
-  install.sh bootstrap, remote shell installer, one-command setup flow,
-  uninstaller, updater, release-asset delivery path, checksum or provenance
-  verification, transactional install, idempotency, backup, rollback, dry-run,
-  noninteractive UX, installer CI, or supply-chain controls. Also use when
-  reviewing a command such as `curl URL | bash` or migrating a monolithic
-  installer to a verified bootstrap plus transaction engine. Do not use for
-  ordinary HTTP requests or shell scripts that do not install software.
+description: Build and audit safe curl-pipe installers.
 ---
 
 # Engineer Curl-to-Bash Installers
@@ -17,6 +8,48 @@ description: >-
 Treat an installer as a package manager in miniature. It crosses a remote-code
 trust boundary, changes durable state, and must remain recoverable when any
 individual step fails.
+
+Use this skill for install.sh bootstraps, remote shell installers, one-command setup flows, uninstallers, updaters, release-asset delivery, checksum or provenance verification, transactional installs, idempotency, backup, rollback, dry-run, installer CI, and supply-chain controls. Do not use it for ordinary HTTP requests or shell scripts that do not install software.
+
+## Workflow Contract
+
+Take control when invoked. Inspect the actual repository and callable tools,
+classify its trust and mutation boundaries, recommend one architecture, preview
+exact changes, apply deterministic machinery, then prove installation,
+rollback, restoration, and release identity.
+
+Move through:
+
+1. **Classify** — identify whether the work is an audit, repair, scaffold,
+   migration, release, or live installation and establish the user's desired
+   proof.
+2. **Inspect** — read the bootstrap, engine, uninstall path, release workflow,
+   payload inventory, state markers, tests, and authoritative references.
+3. **Threat-model** — resolve origins, redirects, artifact identity,
+   authenticity policy, privilege, mutable targets, secrets, and rollback
+   boundaries.
+4. **Preview** — state exact files, commands, mutations, backups, irreversible
+   actions, rollback, and verification before applying.
+5. **Apply** — put repeated and fragile work in scripts, manifests, validators,
+   and transaction machinery; preserve project-specific semantics.
+6. **Verify** — distinguish syntax, command success, persisted state, runtime
+   behavior, rollback, restoration, reproducibility, and user-visible success.
+7. **Recover or complete** — reverse partial changes on failure, or report a
+   receipt with evidence and remaining trust assumptions.
+
+Infer reversible, local, unprivileged defaults. Ask only when the target,
+project semantics, trust policy, live-mutation scope, or irreversible release
+action materially changes the result. Ask one question per decision and never
+more than three. Recommend one path; mention alternatives only when their trust,
+risk, or delivery outcome is materially different.
+
+For longer work, surface the active phase at the beginning, on strategy change,
+and when user action is required. Never publish a release, enable repository
+settings, execute an unreviewed remote installer, or mutate a live installation
+without authorization at that boundary.
+
+Read `references/skill-ux-contract.md` when deciding assumptions, mutation
+classes, recovery, proof, or completion.
 
 ## Start With the Trust Statement
 
@@ -132,3 +165,5 @@ other runtime-native frontmatter without duplicating the instruction body.
 - The release is complete, immutable, and independently verifiable.
 - README rendering, social preview, default branch, assets, and live commands
   were checked before claiming success.
+- Final response states exact changes, verification evidence, rollback or
+  recovery, remaining trust assumptions, and one meaningful next action.
