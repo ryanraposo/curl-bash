@@ -23,6 +23,11 @@ It combines a compact skill definition with a reusable starter, transaction
 engine patterns, an auditor, adversarial tests, CI, Pages delivery, and an
 immutable-release-ready flow.
 
+The skill owns the complete workflow: classify the request, inspect the actual
+bootstrap and transaction system, threat-model its trust roots and mutation
+boundaries, preview exact changes, apply deterministic machinery, then prove
+installation, rollback, restoration, packaging, and release identity.
+
 ## Install the skill
 
 Review first (recommended):
@@ -106,6 +111,10 @@ The review-first and pinned commands reduce ambiguity. Immutable releases stop
 published tags and assets from being altered and automatically add release
 attestation on GitHub. See `references/threat-model.md` for the full boundary.
 
+The workflow-level rules for assumptions, phase transitions, trust layers,
+mutation classes, failure handling, proof, and receipts live in
+[`references/skill-ux-contract.md`](references/skill-ux-contract.md).
+
 ## What “robust” means here
 
 - HTTPS-only redirects, bounded retries, timeouts, private temporary files;
@@ -121,19 +130,34 @@ attestation on GitHub. See `references/threat-model.md` for the full boundary.
 - SHA-pinned GitHub Actions, minimal permissions, attestations, and immutable
   release instructions.
 
+## Validate
+
+```bash
+bash ./tests/skill-ux.sh
+./tests/run.sh
+./scripts/audit-installer.sh .
+```
+
+The constitutional gate enforces one identical 42-character description across
+portable and Hermes payloads, repository/runtime authority, installed and
+packaged workflow references, and version identity. CI also runs ShellCheck,
+the adversarial regression suite, and the repository's own installer audit.
+
 ## Repository map
 
 | Path | Purpose |
 |---|---|
 | `SKILL.md` | Agent workflow and completion gate |
-| `AGENTS.md` | Repository-aware install and self-use funnel |
+| `AGENTS.md` | Repository-aware install, use, and maintenance guide |
 | `index.html` | GitHub Pages landing page and copyable install command |
 | `install.sh` | Small verified release bootstrap |
 | `scripts/install-skill.sh` | Transactional installation engine for this skill |
 | `scripts/scaffold-installer.sh` | General project installer generator |
 | `scripts/audit-installer.sh` | Static architecture and safety audit |
 | `assets/starter/` | Copyable generic installer project |
+| `references/skill-ux-contract.md` | Workflow phases, trust layers, mutations, and proof |
 | `references/` | Threat model, architecture, tests, releases, sources |
+| `tests/skill-ux.sh` | Constitutional and metadata regression checks |
 | `tests/run.sh` | Adversarial regression suite |
 
 MIT © Ryan Raposo
