@@ -1,8 +1,6 @@
 ---
 name: curl-bash
-description: >-
-  Use when designing, auditing, testing, or releasing secure curl-pipe-bash
-  installers with verification, idempotency, rollback, and supply-chain controls.
+description: Build and audit safe curl-pipe installers.
 version: 1.0.0
 author: Ryan Raposo
 license: MIT
