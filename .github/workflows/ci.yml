@@ -23,6 +23,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y shellcheck
       - name: Shellcheck
         run: find . -type f -name '*.sh' -print0 | xargs -0 shellcheck
+      - name: Skill UX contract
+        run: bash ./tests/skill-ux.sh
       - name: Regression suite
         run: ./tests/run.sh
       - name: Audit this installer
