@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2016 # Literal contract patterns intentionally contain shell syntax.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
